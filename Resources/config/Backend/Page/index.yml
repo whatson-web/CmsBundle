@@ -1,0 +1,39 @@
+tree: 'true'
+
+title: 'Liste des pages'
+
+breadcrumb:
+    index:
+        label: 'Liste des pages'
+        action: 'index'
+
+tablePanelProperties:
+
+    headerLabel: 'Liste des pages'
+    headerListButtons:
+        create:
+            buttonType: 'link'
+            color: 'success'
+            label: 'Ajouter une page'
+            action: 'create'
+            modal: 'true'
+            size: 'xs'
+
+    tableFields:
+        buttons:
+            multipleFields:
+            view:
+                icon: 'eye'
+                action: 'view'
+                color: 'info'
+                target: '_blank'
+            update:
+                icon: 'pencil'
+                action: 'update'
+            delete:
+                icon: 'trash'
+                color: 'danger'
+                action: 'delete'
+                confirm: 'Êtes-vous sûr de vouloir supprimer cette page ?'
+        id:
+        name:

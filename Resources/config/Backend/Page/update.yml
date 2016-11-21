@@ -1,0 +1,79 @@
+title: 'Editer une page'
+
+breadcrumb:
+    index:
+        label: 'Liste des pages'
+        action: 'index'
+    update:
+        label: 'Editer une page'
+        action: 'update'
+
+formFields:
+    name:
+    title:
+    resume:
+    body:
+    status:
+    parent:
+    metas:
+    pageTemplateSlug:
+    saveAndStay:
+        label: 'Enregistrer'
+        type : 'submit'
+    saveAndQuit:
+        label: 'Enregistrer & Quitter'
+        type : 'submit'
+
+central:
+    tabs:
+        contenu:
+            name: 'Contenu'
+            icon: 'file-text'
+            formZones:
+                entete:
+                    title: 'En tête'
+                    fields:
+                        name:
+                            col: '6'
+                        title:
+                            col: '6'
+                content:
+                    title: 'Contenu'
+                    fields:
+                        resume:
+                            col: '12'
+                        body:
+                            col: '12'
+        metas:
+            name: 'SEO'
+            icon: 'google'
+            formZones:
+                seo:
+                    fields:
+                        metas.title:
+                            col: '12'
+                        metas.description:
+                            col: '12'
+                        metas.robots:
+                            col: '12'
+    viewLink:
+        name: 'Voir'
+        icon: 'eye'
+        action: 'view'
+
+column:
+    panelZones:
+        publication:
+            headerLabel: 'Publication'
+            icon: 'save'
+            fields:
+                - status
+                - pageTemplateSlug
+                - parent
+            footerListFormButtons:
+                saveAndQuit:
+                    field: 'saveAndQuit'
+                    color: 'primary'
+                saveAndStay:
+                    field: 'saveAndStay'
+                    color: 'success'

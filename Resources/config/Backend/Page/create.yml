@@ -1,0 +1,15 @@
+title: 'Créer une page'
+
+formFields:
+    - name
+    - pageTemplateSlug
+    - parent
+
+footerFormFields:
+    create:
+        label: 'Créer'
+        field: 'create'
+        color: 'success'
+    createEdit:
+        label: 'Créer & Editer'
+        field: 'createEdit'

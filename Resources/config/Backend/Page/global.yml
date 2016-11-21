@@ -1,0 +1,68 @@
+actions:
+    index:
+        route: 'bk_wh_cms_page_index'
+        parameters:
+            parentId: 'parent.id'
+    order:
+        route: 'bk_wh_cms_page_order'
+    create:
+        route: 'bk_wh_cms_page_create'
+    update:
+        route: 'bk_wh_cms_page_update'
+        parameters:
+            id: 'id'
+    delete:
+        route: 'bk_wh_cms_page_delete'
+        parameters:
+            id: 'id'
+    view:
+        route: 'ft_wh_seo_router_dispatch'
+        parameters:
+            url: 'url.url'
+
+defaultData:
+    parent.id:
+
+formFields:
+    name:
+        label: 'Nom'
+        field: 'name'
+        type: 'text'
+    title:
+        label: 'Titre'
+        field: 'title'
+        type: 'text'
+    resume:
+        label: 'Résumé'
+        field: 'resume'
+        type: 'textarea'
+    body:
+        label: 'Contenu'
+        field: 'body'
+        type: 'tinymce'
+    parent:
+        label: 'Page parente'
+        field: 'parent'
+        type: 'entity'
+        class: 'WHCmsBundle:Page'
+        choice_label: 'indentedName'
+    pageTemplateSlug:
+        label: 'Template'
+        field: 'pageTemplateSlug'
+        type: 'choice'
+        options:
+            type: 'parameter'
+            parameter: 'wh_cms_templates_choices'
+    status:
+        label: 'Etat'
+        type : 'choice'
+        options:
+            type: 'static'
+            field: 'statuses'
+    metas:
+        type: 'form'
+        form: 'WH\SeoBundle\Form\Backend\MetasType'
+
+menus:
+    main: 'backend-menu'
+    right: 'backend-right'
