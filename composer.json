@@ -1,0 +1,16 @@
+{
+  "name": "whatson-web/cms-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony - Whatson Web - CmsBundle",
+  "homepage": "https://github.com/whatson-web/CmsBundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Whatson Web - Developers",
+      "email": "dev@whatson-web.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.9"
+  }
+}
