@@ -65,4 +65,4 @@ formFields:
 
 menus:
     main: 'backend-menu'
-    right: 'backend-right'
+    right: 'backend-menu-right'
