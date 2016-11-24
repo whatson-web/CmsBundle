@@ -32,9 +32,9 @@ wh_cms:
 ```yaml
 wh_seo:
     entities:
-        WH\BlogBundle\Entity\Post:
+        WH\CmsBundle\Entity\Page:
             urlFields:
-                - {type: 'field', field: 'page.url'}
+                - {type: 'tree', entity: 'WH\CmsBundle\Entity\Page', field: 'parent'}
                 - {type: 'field', field: 'slug'}
             defaultMetasFields:
                 title: 'name'
