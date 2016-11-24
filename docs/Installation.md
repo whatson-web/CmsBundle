@@ -28,6 +28,19 @@ wh_cms:
             frontView: 'WHCmsBundle:FrontEnd/Page:contact.html.twig'
 ```
 
+## Base configuration URL
+```yaml
+wh_seo:
+    entities:
+        WH\BlogBundle\Entity\Post:
+            urlFields:
+                - {type: 'field', field: 'page.url'}
+                - {type: 'field', field: 'slug'}
+            defaultMetasFields:
+                title: 'name'
+                description: 'resume'
+```
+
 ## Installation des entités
 Copier les fichiers suivants dans `/src/WHEntities/CmsBundle` :
 
