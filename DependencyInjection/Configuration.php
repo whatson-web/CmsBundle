@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
 								->scalarNode('backendController')->end()
 								->scalarNode('frontController')->end()
 								->scalarNode('frontView')->end()
+								->scalarNode('updateConfig')->end()
 							->end()
 						->end()
 					->end()

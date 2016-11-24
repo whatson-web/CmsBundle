@@ -2,10 +2,13 @@
 
 namespace WH\CmsBundle\Controller\Backend;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Yaml\Yaml;
 use WH\BackendBundle\Controller\Backend\BaseController;
 use WH\LibBundle\Utils\Inflector;
 
@@ -98,7 +101,11 @@ class PageController extends BaseController
 
 		$renderVars = array();
 
-		$config = $this->getConfig($entityPathConfig, 'update');
+		if (!empty($pageTemplate['updateConfig'])) {
+			$config = $this->getOverrideConfig($pageTemplate['updateConfig']);
+		} else {
+			$config = $this->getConfig($entityPathConfig, 'update');
+		}
 		$globalConfig = $this->getGlobalConfig($entityPathConfig);
 
 		$renderVars['globalConfig'] = $globalConfig;
@@ -213,6 +220,30 @@ class PageController extends BaseController
 		$orderController = $this->get('bk.wh.back.order_controller');
 
 		return $orderController->order($this->getEntityPathConfig(), $request);
+	}
+
+	/**
+	 * @param $action
+	 *
+	 * @return mixed
+	 */
+	private function getOverrideConfig($action)
+	{
+		$ymlPath = $this->get('kernel')->getRootDir();
+		$ymlPath .= '/Resources/WHCmsBundle/config/Backend/Page/' . $action . '.yml';
+
+		if (!file_exists($ymlPath)) {
+			throw new NotFoundHttpException(
+				'Le fichier de configuration n\'existe pas. Il devrait être ici : ' . $ymlPath
+			);
+		}
+
+		$config = Yaml::parse(file_get_contents($ymlPath));
+		if ($this->validConfig($config)) {
+			return $config;
+		}
+
+		return array();
 	}
 
 }

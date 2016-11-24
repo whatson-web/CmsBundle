@@ -24,7 +24,9 @@ class PageController extends BaseController
 	public function viewAction($id, Request $request)
 	{
 		$em = $this->get('doctrine')->getManager();
-		$page = $em->getRepository('WHCmsBundle:Page')->get(
+		$pageRepository = $em->getRepository('WHCmsBundle:Page');
+
+		$page = $pageRepository->get(
 			'one',
 			array(
 				'conditions' => array(
@@ -65,10 +67,13 @@ class PageController extends BaseController
 			$view = $pageTemplate['frontView'];
 		}
 
+		$breadcrumb = $pageRepository->getPath($page);
+
 		return $this->render(
 			$view,
 			array(
-				'page' => $page,
+				'page'       => $page,
+				'breadcrumb' => $breadcrumb,
 			)
 		);
 	}
