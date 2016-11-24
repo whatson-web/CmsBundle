@@ -28,7 +28,7 @@ wh_cms:
             frontView: 'WHCmsBundle:FrontEnd/Page:contact.html.twig'
 ```
 
-## Base configuration URL
+## Base configuration SEO
 ```yaml
 wh_seo:
     entities:
