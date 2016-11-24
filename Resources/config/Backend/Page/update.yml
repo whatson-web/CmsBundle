@@ -15,6 +15,7 @@ formFields:
     body:
     status:
     parent:
+    menus:
     metas:
     pageTemplateSlug:
     saveAndStay:
@@ -70,6 +71,7 @@ column:
                 - status
                 - pageTemplateSlug
                 - parent
+                - menus
             footerListFormButtons:
                 saveAndQuit:
                     field: 'saveAndQuit'

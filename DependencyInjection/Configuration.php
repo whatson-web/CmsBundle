@@ -33,6 +33,10 @@ class Configuration implements ConfigurationInterface
 							->end()
 						->end()
 					->end()
+					->arrayNode('menus')
+						->prototype('scalar')
+						->end()
+					->end()
 				->end()
 			->end();
 	}

@@ -32,6 +32,12 @@ class WHCmsExtension extends Extension
 		}
 		$container->setParameter('wh_cms_templates_choices', $templatesChoices);
 
+		$menusChoices = array();
+		foreach ($config['menus'] as $menuSlug => $menuName) {
+			$menusChoices[$menuSlug] = $menuName;
+		}
+		$container->setParameter('wh_cms_menus_choices', $menusChoices);
+
 		$loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
 	}

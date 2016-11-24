@@ -83,6 +83,13 @@ abstract class Page
 	protected $pageTemplateSlug;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="menus", type="text", nullable=true)
+	 */
+	protected $menus;
+
+	/**
 	 * Get id
 	 *
 	 * @return integer
@@ -255,5 +262,30 @@ abstract class Page
 	public function getPageTemplateSlug()
 	{
 		return $this->pageTemplateSlug;
+	}
+
+	/**
+	 * Set menus
+	 *
+	 * @param string $menus
+	 *
+	 * @return Page
+	 */
+	public function setMenus($menus)
+	{
+		$menus = json_encode($menus);
+		$this->menus = $menus;
+
+		return $this;
+	}
+
+	/**
+	 * Get menus
+	 *
+	 * @return string
+	 */
+	public function getMenus()
+	{
+		return json_decode($this->menus, true);
 	}
 }

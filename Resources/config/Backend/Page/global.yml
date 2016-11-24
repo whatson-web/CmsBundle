@@ -46,6 +46,14 @@ formFields:
         type: 'entity'
         class: 'WHCmsBundle:Page'
         choice_label: 'indentedName'
+    menus:
+        label: 'Menu(s)'
+        field: 'menus'
+        type: 'choice'
+        multiple: 'true'
+        options:
+            type: 'parameter'
+            parameter: 'wh_cms_menus_choices'
     pageTemplateSlug:
         label: 'Template'
         field: 'pageTemplateSlug'
