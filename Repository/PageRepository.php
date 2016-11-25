@@ -20,7 +20,11 @@ class PageRepository extends BaseTreeRepository
 		return $this
 			->createQueryBuilder('page')
 			->addSelect('parent')
+			->addSelect('url')
+			->addSelect('metas')
 			->leftJoin('page.parent', 'parent')
+			->leftJoin('page.url', 'url')
+			->leftJoin('page.metas', 'metas')
 			->orderBy('page.lft', 'ASC');
 	}
 }
