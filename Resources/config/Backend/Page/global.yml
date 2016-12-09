@@ -72,5 +72,5 @@ formFields:
         form: 'WH\SeoBundle\Form\Backend\MetasType'
 
 menus:
-    main: 'backend-menu'
-    right: 'backend-menu-right'
+    main: 'backendMenu'
+    right: 'backendMenuRight'

@@ -69,7 +69,10 @@ class PageController extends BaseController
 	 */
 	public function updateAction($id, Request $request)
 	{
+		$this->backendTranslator = $this->container->get('bk.wh.back.translator');
+
 		$entityPathConfig = $this->getEntityPathConfig();
+		$this->setTranslateDomain($entityPathConfig);
 
 		$em = $this->container->get('doctrine')->getManager();
 
