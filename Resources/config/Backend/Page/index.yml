@@ -1,20 +1,20 @@
 tree: 'true'
 
-title: 'Liste des pages'
+title: 'Pages list'
 
 breadcrumb:
     index:
-        label: 'Liste des pages'
+        label: 'Pages list'
         action: 'index'
 
 tablePanelProperties:
 
-    headerLabel: 'Liste des pages'
+    headerLabel: 'Pages list'
     headerListButtons:
         create:
             buttonType: 'link'
             color: 'success'
-            label: 'Ajouter une page'
+            label: 'Add a page'
             action: 'create'
             modal: 'true'
             size: 'xs'
@@ -34,6 +34,6 @@ tablePanelProperties:
                 icon: 'trash'
                 color: 'danger'
                 action: 'delete'
-                confirm: 'Êtes-vous sûr de vouloir supprimer cette page ?'
+                confirm: 'Do you really want to delete this page ?'
         id:
         name:

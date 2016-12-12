@@ -1,11 +1,11 @@
-title: 'Editer une page'
+title: 'Edit a page'
 
 breadcrumb:
     index:
-        label: 'Liste des pages'
+        label: 'Pages list'
         action: 'index'
     update:
-        label: 'Editer une page'
+        label: 'Edit a page'
         action: 'update'
 
 formFields:
@@ -19,27 +19,27 @@ formFields:
     metas:
     pageTemplateSlug:
     saveAndStay:
-        label: 'Enregistrer'
+        label: 'Save'
         type : 'submit'
     saveAndQuit:
-        label: 'Enregistrer & Quitter'
+        label: 'Save & Quit'
         type : 'submit'
 
 central:
     tabs:
         contenu:
-            name: 'Contenu'
+            name: 'Content'
             icon: 'file-text'
             formZones:
                 entete:
-                    title: 'En tête'
+                    title: 'Header'
                     fields:
                         name:
                             col: '6'
                         title:
                             col: '6'
                 content:
-                    title: 'Contenu'
+                    title: 'Content'
                     fields:
                         resume:
                             col: '12'
@@ -58,7 +58,7 @@ central:
                         metas.robots:
                             col: '12'
     viewLink:
-        name: 'Voir'
+        name: 'View'
         icon: 'eye'
         action: 'view'
 

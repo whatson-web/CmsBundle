@@ -1,4 +1,4 @@
-title: 'Créer une page'
+title: 'Create a page'
 
 formFields:
     - name
@@ -7,9 +7,9 @@ formFields:
 
 footerFormFields:
     create:
-        label: 'Créer'
+        label: 'Create'
         field: 'create'
         color: 'success'
     createEdit:
-        label: 'Créer & Editer'
+        label: 'Create & Edit'
         field: 'createEdit'

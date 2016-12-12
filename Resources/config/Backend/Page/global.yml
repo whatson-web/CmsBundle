@@ -25,23 +25,23 @@ defaultData:
 
 formFields:
     name:
-        label: 'Nom'
+        label: 'Name'
         field: 'name'
         type: 'text'
     title:
-        label: 'Titre'
+        label: 'Title'
         field: 'title'
         type: 'text'
     resume:
-        label: 'Résumé'
+        label: 'Resume'
         field: 'resume'
         type: 'textarea'
     body:
-        label: 'Contenu'
+        label: 'Content'
         field: 'body'
         type: 'tinymce'
     parent:
-        label: 'Page parente'
+        label: 'Parent page'
         field: 'parent'
         type: 'entity'
         class: 'WHCmsBundle:Page'
@@ -62,7 +62,7 @@ formFields:
             type: 'parameter'
             parameter: 'wh_cms_templates_choices'
     status:
-        label: 'Etat'
+        label: 'Status'
         type : 'choice'
         options:
             type: 'static'
