@@ -65,3 +65,18 @@ Déclarer les manuellement dans `/app/autoload.php` :
 ```php
 AnnotationRegistry::registerFile(__DIR__ . '/../src/WHEntities/CmsBundle/Page.php');
 ```
+##créer le menu
+recréer les onglets du menu 
+exemple: ajouter les pages
+ajouter dans le `BackendBundle/Menu/menu.php`
+
+	$menu->addChild(
+				'pages',
+				array(
+					'label'  => $this->getLabel('sitemap', 'Pages'),
+					'route'  => 'bk_wh_cms_page_index',
+					'extras' => array(
+						'safe_label' => true,
+					),
+				)
+			);
