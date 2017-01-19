@@ -23,9 +23,6 @@ wh_cms:
             frontView: 'WHCmsBundle:FrontEnd/Page:home.html.twig'
         page:
             name: 'Page normale'
-        contact:
-            name: 'Page contact'
-            frontView: 'WHCmsBundle:FrontEnd/Page:contact.html.twig'
 ```
 
 ## Base configuration SEO
@@ -35,7 +32,7 @@ wh_seo:
         WH\CmsBundle\Entity\Page:
             urlFields:
                 - {type: 'tree', entity: 'WH\CmsBundle\Entity\Page', field: 'parent'}
-                - {type: 'field', field: 'slug'}
+                - {type: 'field', field: 'slug', suffix: '/'}
             defaultMetasFields:
                 title: 'name'
                 description: 'resume'
@@ -65,18 +62,16 @@ Déclarer les manuellement dans `/app/autoload.php` :
 ```php
 AnnotationRegistry::registerFile(__DIR__ . '/../src/WHEntities/CmsBundle/Page.php');
 ```
-##créer le menu
-recréer les onglets du menu 
-exemple: ajouter les pages
-ajouter dans le `BackendBundle/Menu/menu.php`
+## Ajouter l'onglet dans le menu admin
+Ajouter le code suivant dans le fichier : `src/BackendBundle/Menu/Menu.php`
 
 	$menu->addChild(
-				'pages',
-				array(
-					'label'  => $this->getLabel('sitemap', 'Pages'),
-					'route'  => 'bk_wh_cms_page_index',
-					'extras' => array(
-						'safe_label' => true,
-					),
-				)
-			);
+		'pages',
+		array(
+			'label'  => $this->getLabel('sitemap', 'Pages'),
+			'route'  => 'bk_wh_cms_page_index',
+			'extras' => array(
+				'safe_label' => true,
+			),
+		)
+	);
