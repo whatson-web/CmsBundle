@@ -113,7 +113,7 @@ class PageController extends BaseController
 
 		$renderVars['globalConfig'] = $globalConfig;
 
-		$renderVars['title'] = $config['title'];
+        $renderVars['title'] = $this->backendTranslator->trans($config['title']);
 
 		$formFields = $this->getFormFields($config['formFields'], $entityPathConfig);
 
@@ -159,6 +159,11 @@ class PageController extends BaseController
 		$renderVars['form'] = $form;
 		$renderVars['formFields'] = $formFields;
 
+        if (!empty($config['central']['viewLink']['name'])) {
+            $config['central']['viewLink']['name'] = $this->backendTranslator->trans(
+                $config['central']['viewLink']['name']
+            );
+        }
 		if (!empty($config['central']['viewLink']['action'])) {
 			$config['central']['viewLink']['url'] = $this->getActionUrl(
 				$entityPathConfig,
@@ -167,9 +172,25 @@ class PageController extends BaseController
 			);
 		}
 
+        foreach ($config['central']['tabs'] as $tabSlug => $tabProperties) {
+            $config['central']['tabs'][$tabSlug]['name'] = $this->backendTranslator->trans(
+                $config['central']['tabs'][$tabSlug]['name']
+            );
+            if (!empty($tabProperties['formZones'])) {
+                foreach ($tabProperties['formZones'] as $formZoneSlug => $formZone) {
+                    if (isset($formZone['title'])) {
+                        $config['central']['tabs'][$tabSlug]['formZones'][$formZoneSlug]['title'] = $this->backendTranslator->trans(
+                            $config['central']['tabs'][$tabSlug]['formZones'][$formZoneSlug]['title']
+                        );
+                    }
+                }
+            }
+        }
+
 		$renderVars['central'] = $config['central'];
 
 		foreach ($config['column']['panelZones'] as $key => $panelZone) {
+            $panelZone['headerLabel'] = $this->backendTranslator->trans($panelZone['headerLabel']);
 
 			$panelZone['form'] = $form;
 			$panelZone['formFields'] = $this->getFormFields($panelZone['fields'], $entityPathConfig);
@@ -182,6 +203,7 @@ class PageController extends BaseController
 
 					$footerListFormButton = array_merge($footerListFormButton, $config['formFields'][$field]);
 					$footerListFormButton['form'] = $form;
+                    $footerListFormButton['label'] = $this->backendTranslator->trans($footerListFormButton['label']);
 
 					$panelZone['footerListFormButtons'][$field] = $footerListFormButton;
 				}
