@@ -69,11 +69,16 @@ class PageController extends BaseController
      */
     public function updateAction($id, Request $request)
     {
-        $em = $this->container->get('doctrine')->getManager();
+        $updateController = $this->get('bk.wh.back.update_controller');
 
         $entityPathConfig = $this->getEntityPathConfig();
 
-        $data = $em->getRepository($this->getRepositoryName($entityPathConfig))->get(
+        $updateController->entityPathConfig = $entityPathConfig;
+        $updateController->request = $request;
+
+        $em = $this->get('doctrine')->getManager();
+
+        $data = $em->getRepository($updateController->getRepositoryName($entityPathConfig))->get(
             'one',
             array(
                 'conditions' => array(
@@ -83,120 +88,65 @@ class PageController extends BaseController
         );
 
         if (!$data) {
-            return $this->redirect($this->getActionUrl($entityPathConfig, 'index'));
+            return $updateController->redirect($updateController->getActionUrl($entityPathConfig, 'index'));
         }
 
         $pageTemplate = '';
         if ($data->getPageTemplateSlug()) {
             $pageTemplate = $this->getParameter('wh_cms_templates')[$data->getPageTemplateSlug()];
         }
-        if (!empty($pageTemplate['backendController'])) {
 
+        if (!empty($pageTemplate['backendController'])) {
             return $this->forward(
                 $pageTemplate['backendController'] . ':update',
                 array(
-                    'id'      => $id,
+                    'id' => $id,
                     'request' => $request,
                 )
             );
         }
 
-        $renderVars = array();
+        $updateController->data = $data;
 
-        $config = $this->getConfig($entityPathConfig, 'update');
-        $globalConfig = $this->getGlobalConfig($entityPathConfig);
+        $updateController->config = $updateController->getConfig($entityPathConfig, 'update');
+        $updateController->globalConfig = $updateController->getGlobalConfig($entityPathConfig);
 
-        $renderVars['globalConfig'] = $globalConfig;
+        $updateController->renderVars['globalConfig'] = $updateController->globalConfig;
 
-        $renderVars['title'] = $config['title'];
-
-        $formFields = $this->getFormFields($config['formFields'], $entityPathConfig);
-
-        $form = $this->getEntityForm($formFields, $entityPathConfig, $data);
-
-        $renderVars['breadcrumb'] = $this->getBreadcrumb(
-            $config['breadcrumb'],
-            $entityPathConfig,
-            $data
-        );
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $data = $form->getData();
-
-            $em->persist($data);
-            $em->flush();
-
-            $redirectUrl = $this->getActionUrl($entityPathConfig, 'index', $data);
-            if ($form->has('saveAndStay') && $form->get('saveAndStay')->isClicked()) {
-                $redirectUrl = $this->getActionUrl($entityPathConfig, 'update', $data);
-            }
-
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(
-                    array(
-                        'success'  => true,
-                        'redirect' => $redirectUrl,
-                    )
-                );
-            }
-
-            return $this->redirect($redirectUrl);
-        } else {
-            $form->setData($data);
+        $updateController->createUpdateForm();
+        if ($updateController->request->getMethod() == 'POST') {
+            return $updateController->handleUpdateFormSubmission();
         }
+        $updateController->renderUpdateForm();
 
-        $form = $form->createView();
-        $renderVars['form'] = $form;
-        $renderVars['formFields'] = $formFields;
+        $updateController->getFormProperties();
 
-        if (!empty($config['central']['viewLink']['action'])) {
-            $config['central']['viewLink']['url'] = $this->getActionUrl(
+        $updateController->renderVars['title'] = $updateController->config['title'];
+
+        if (!$updateController->modal) {
+            $updateController->renderVars['breadcrumb'] = $updateController->getBreadcrumb(
+                $updateController->config['breadcrumb'],
                 $entityPathConfig,
-                $config['central']['viewLink']['action'],
                 $data
             );
         }
 
-        foreach ($config['central']['tabs'] as $tabSlug => $tabProperties) {
-            if (isset($tabProperties['iframeContent'])) {
-                $config['central']['tabs'][$tabSlug]['iframeContent']['url'] = $this->getActionUrl(
-                    $entityPathConfig,
-                    $tabProperties['iframeContent']['action'],
-                    $data
-                );
-            }
-        }
-
-        $renderVars['central'] = $config['central'];
-
-        foreach ($config['column']['panelZones'] as $key => $panelZone) {
-            $panelZone['form'] = $form;
-            $panelZone['formFields'] = $this->getFormFields($panelZone['fields'], $entityPathConfig);
-
-            unset($panelZone['fields']);
-
-            if (isset($panelZone['footerListFormButtons'])) {
-                foreach ($panelZone['footerListFormButtons'] as $field => $footerListFormButton) {
-                    $footerListFormButton = array_merge($footerListFormButton, $config['formFields'][$field]);
-                    $footerListFormButton['form'] = $form;
-
-                    $panelZone['footerListFormButtons'][$field] = $footerListFormButton;
-                }
-            }
-            $config['column']['panelZones'][$key] = $panelZone;
-        }
-
-        $renderVars['column'] = $config['column'];
-
         $view = '@WHBackendTemplate/BackendTemplate/View/update.html.twig';
+        if ($updateController->modal) {
+            $view = '@WHBackendTemplate/BackendTemplate/View/modal.html.twig';
+            if (isset($updateController->config['view'])) {
+                $view = $updateController->config['view'];
+            }
+        }
 
-        $renderVars = $this->get('bk.wh.back.update_controller')->translateRenderVars($entityPathConfig, $renderVars);
+        $updateController->renderVars = $updateController->translateRenderVars(
+            $entityPathConfig,
+            $updateController->renderVars
+        );
 
         return $this->container->get('templating')->renderResponse(
             $view,
-            $renderVars
+            $updateController->renderVars
         );
     }
 
