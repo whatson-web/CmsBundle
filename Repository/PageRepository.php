@@ -12,19 +12,37 @@ use WH\LibBundle\Repository\BaseTreeRepository;
 class PageRepository extends BaseTreeRepository
 {
 
-	/**
-	 * @return \Doctrine\ORM\QueryBuilder
-	 */
-	public function getBaseQuery()
-	{
-		return $this
-			->createQueryBuilder('page')
-			->addSelect('parent')
-			->addSelect('url')
-			->addSelect('metas')
-			->leftJoin('page.parent', 'parent')
-			->leftJoin('page.url', 'url')
-			->leftJoin('page.metas', 'metas')
-			->orderBy('page.lft', 'ASC');
-	}
+    public $joins = array(
+        'parent' => array(),
+        'url'    => array(),
+        'metas'  => array(),
+    );
+
+    /**
+     * @return string
+     */
+    public function getEntityNameQueryBuilder()
+    {
+        return 'page';
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getBaseQuery()
+    {
+        $this->qb = $this
+            ->createQueryBuilder($this->getEntityNameQueryBuilder())
+            ->orderBy('page.lft', 'ASC');
+
+        $this->addJoins(
+            array(
+                'parent',
+                'url',
+                'metas',
+            )
+        );
+
+        return $this->qb;
+    }
 }
