@@ -1,18 +1,18 @@
 actions:
     index:
-        route: 'bk_wh_cms_page_index'
+        route: 'bk_cms_page_index'
         parameters:
             parentId: 'parent.id'
     order:
-        route: 'bk_wh_cms_page_order'
+        route: 'bk_cms_page_order'
     create:
-        route: 'bk_wh_cms_page_create'
+        route: 'bk_cms_page_create'
     update:
-        route: 'bk_wh_cms_page_update'
+        route: 'bk_cms_page_update'
         parameters:
             id: 'id'
     delete:
-        route: 'bk_wh_cms_page_delete'
+        route: 'bk_cms_page_delete'
         parameters:
             id: 'id'
     view:

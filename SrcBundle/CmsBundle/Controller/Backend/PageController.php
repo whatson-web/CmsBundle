@@ -1,14 +1,9 @@
 <?php
 
-namespace WH\CmsBundle\Controller\Backend;
+namespace CmsBundle\Controller\Backend;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Yaml\Yaml;
 use WH\BackendBundle\Controller\Backend\BaseController;
 use WH\LibBundle\Utils\Inflector;
 
@@ -17,17 +12,17 @@ use WH\LibBundle\Utils\Inflector;
  *
  * Class PageController
  *
- * @package WH\CmsBundle\Controller\Backend
+ * @package CmsBundle\Controller\Backend
  */
 class PageController extends BaseController
 {
 
-    public $bundlePrefix = 'WH';
+    public $bundlePrefix = '';
     public $bundle = 'CmsBundle';
     public $entity = 'Page';
 
     /**
-     * @Route("/index/{parentId}", name="bk_wh_cms_page_index", requirements={"parentId": ".*"}, defaults={"parentId": null})
+     * @Route("/index/{parentId}", name="bk_cms_page_index", requirements={"parentId": ".*"}, defaults={"parentId": null})
      *
      * @param         $parentId
      * @param Request $request
@@ -46,7 +41,7 @@ class PageController extends BaseController
     }
 
     /**
-     * @Route("/create/", name="bk_wh_cms_page_create")
+     * @Route("/create/", name="bk_cms_page_create")
      *
      * @param Request $request
      *
@@ -60,7 +55,7 @@ class PageController extends BaseController
     }
 
     /**
-     * @Route("/update/{id}", name="bk_wh_cms_page_update")
+     * @Route("/update/{id}", name="bk_cms_page_update")
      *
      * @param         $id
      * @param Request $request
@@ -151,7 +146,7 @@ class PageController extends BaseController
     }
 
     /**
-     * @Route("/delete/{id}", name="bk_wh_cms_page_delete")
+     * @Route("/delete/{id}", name="bk_cms_page_delete")
      *
      * @param         $id
      *
@@ -165,7 +160,7 @@ class PageController extends BaseController
     }
 
     /**
-     * @Route("/order/", name="bk_wh_cms_page_order")
+     * @Route("/order/", name="bk_cms_page_order")
      *
      * @param Request $request
      *
@@ -176,30 +171,6 @@ class PageController extends BaseController
         $orderController = $this->get('bk.wh.back.order_controller');
 
         return $orderController->order($this->getEntityPathConfig(), $request);
-    }
-
-    /**
-     * @param $action
-     *
-     * @return mixed
-     */
-    private function getOverrideConfig($action)
-    {
-        $ymlPath = $this->get('kernel')->getRootDir();
-        $ymlPath .= '/Resources/WHCmsBundle/config/Backend/Page/' . $action . '.yml';
-
-        if (!file_exists($ymlPath)) {
-            throw new NotFoundHttpException(
-                'Le fichier de configuration n\'existe pas. Il devrait être ici : ' . $ymlPath
-            );
-        }
-
-        $config = Yaml::parse(file_get_contents($ymlPath));
-        if ($this->validConfig($config)) {
-            return $config;
-        }
-
-        return array();
     }
 
 }

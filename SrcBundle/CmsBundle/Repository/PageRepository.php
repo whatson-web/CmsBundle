@@ -1,13 +1,13 @@
 <?php
 
-namespace WH\CmsBundle\Repository;
+namespace CmsBundle\Repository;
 
 use WH\LibBundle\Repository\BaseTreeRepository;
 
 /**
  * Class PageRepository
  *
- * @package WH\CmsBundle\Repository
+ * @package CmsBundle\Repository
  */
 class PageRepository extends BaseTreeRepository
 {

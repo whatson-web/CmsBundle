@@ -1,6 +1,6 @@
 <?php
 
-namespace WH\CmsBundle\Controller\Backend;
+namespace CmsBundle\Controller\Backend;
 
 use Symfony\Component\HttpFoundation\Request;
 use WH\BackendBundle\Controller\Backend\BaseController;
@@ -8,12 +8,12 @@ use WH\BackendBundle\Controller\Backend\BaseController;
 /**
  * Class EntityPageController
  *
- * @package WH\CmsBundle\Controller\Backend
+ * @package CmsBundle\Controller\Backend
  */
 class EntityPageController extends BaseController
 {
 
-    public $bundlePrefix = 'WH';
+    public $bundlePrefix = '';
     public $bundle = 'CmsBundle';
     public $entity = 'Page';
 
