@@ -1,5 +1,6 @@
 # Installation
 `composer require whatson-web/cms-bundle dev-master`
+
 `app/console wh:install:bundle cms`
 
 ## Ajouter les routes
