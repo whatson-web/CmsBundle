@@ -5,8 +5,8 @@
 
 ## Ajouter les routes
 ```yaml
-bk_wh_cms:
-    resource: "@WHCmsBundle/Controller/Backend/"
+bk_cms:
+    resource: "@CmsBundle/Controller/Backend/"
     type:     annotation
 ```
 
@@ -16,7 +16,7 @@ wh_cms:
     templates:
         home:
             name: 'Accueil'
-            frontView: 'WHCmsBundle:FrontEnd/Page:home.html.twig'
+            frontView: 'CmsBundle:FrontEnd/Page:home.html.twig'
         page:
             name: 'Page normale'
 ```
@@ -25,9 +25,9 @@ wh_cms:
 ```yaml
 wh_seo:
     entities:
-        WH\CmsBundle\Entity\Page:
+        CmsBundle\Entity\Page:
             urlFields:
-                - {type: 'tree', entity: 'WH\CmsBundle\Entity\Page', field: 'parent'}
+                - {type: 'tree', entity: 'CmsBundle\Entity\Page', field: 'parent'}
                 - {type: 'field', field: 'slug', suffix: '/'}
             defaultMetasFields:
                 title: 'name'
@@ -41,7 +41,7 @@ Ajouter le code suivant dans le fichier : `src/BackendBundle/Menu/Menu.php`
 		'pages',
 		array(
 			'label'  => $this->getLabel('sitemap', 'Pages'),
-			'route'  => 'bk_wh_cms_page_index',
+			'route'  => 'bk_cms_page_index',
 			'extras' => array(
 				'safe_label' => true,
 			),
