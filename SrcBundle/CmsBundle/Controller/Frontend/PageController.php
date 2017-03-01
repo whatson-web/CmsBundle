@@ -1,6 +1,6 @@
 <?php
 
-namespace WH\CmsBundle\Controller\Frontend;
+namespace CmsBundle\Controller\Frontend;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -10,7 +10,7 @@ use WH\LibBundle\Entity\Status;
 /**
  * Class PageController
  *
- * @package WH\CmsBundle\Controller\Frontend
+ * @package CmsBundle\Controller\Frontend
  */
 class PageController extends BaseController
 {
@@ -24,7 +24,7 @@ class PageController extends BaseController
 	public function viewAction($id, Request $request)
 	{
 		$em = $this->get('doctrine')->getManager();
-		$pageRepository = $em->getRepository('WHCmsBundle:Page');
+		$pageRepository = $em->getRepository('CmsBundle:Page');
 
 		$page = $pageRepository->get(
 			'one',

@@ -47,20 +47,20 @@ abstract class Page
 
 	/**
 	 * @Gedmo\TreeRoot
-	 * @ORM\ManyToOne(targetEntity="Page")
+	 * @ORM\ManyToOne(targetEntity="CmsBundle\Entity\Page")
 	 * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $root;
 
 	/**
 	 * @Gedmo\TreeParent
-	 * @ORM\ManyToOne(targetEntity="Page", inversedBy="children")
+	 * @ORM\ManyToOne(targetEntity="CmsBundle\Entity\Page", inversedBy="children")
 	 * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $parent;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Page", mappedBy="parent")
+	 * @ORM\OneToMany(targetEntity="CmsBundle\Entity\Page", mappedBy="parent")
 	 * @ORM\OrderBy({"lft" = "ASC"})
 	 */
 	protected $children;
@@ -102,11 +102,11 @@ abstract class Page
 	/**
 	 * Set root
 	 *
-	 * @param \WH\CmsBundle\Entity\Page $root
+	 * @param \CmsBundle\Entity\Page $root
 	 *
 	 * @return Page
 	 */
-	public function setRoot(\WH\CmsBundle\Entity\Page $root = null)
+	public function setRoot(\CmsBundle\Entity\Page $root = null)
 	{
 		$this->root = $root;
 
@@ -116,7 +116,7 @@ abstract class Page
 	/**
 	 * Get root
 	 *
-	 * @return \WH\CmsBundle\Entity\Page
+	 * @return \CmsBundle\Entity\Page
 	 */
 	public function getRoot()
 	{
@@ -126,11 +126,11 @@ abstract class Page
 	/**
 	 * Set parent
 	 *
-	 * @param \WH\CmsBundle\Entity\Page $parent
+	 * @param \CmsBundle\Entity\Page $parent
 	 *
 	 * @return Page
 	 */
-	public function setParent(\WH\CmsBundle\Entity\Page $parent = null)
+	public function setParent(\CmsBundle\Entity\Page $parent = null)
 	{
 		$this->parent = $parent;
 
@@ -140,7 +140,7 @@ abstract class Page
 	/**
 	 * Get parent
 	 *
-	 * @return \WH\CmsBundle\Entity\Page
+	 * @return \CmsBundle\Entity\Page
 	 */
 	public function getParent()
 	{
@@ -150,11 +150,11 @@ abstract class Page
 	/**
 	 * Add child
 	 *
-	 * @param \WH\CmsBundle\Entity\Page $child
+	 * @param \CmsBundle\Entity\Page $child
 	 *
 	 * @return Page
 	 */
-	public function addChild(\WH\CmsBundle\Entity\Page $child)
+	public function addChild(\CmsBundle\Entity\Page $child)
 	{
 		$this->children[] = $child;
 
@@ -164,9 +164,9 @@ abstract class Page
 	/**
 	 * Remove child
 	 *
-	 * @param \WH\CmsBundle\Entity\Page $child
+	 * @param \CmsBundle\Entity\Page $child
 	 */
-	public function removeChild(\WH\CmsBundle\Entity\Page $child)
+	public function removeChild(\CmsBundle\Entity\Page $child)
 	{
 		$this->children->removeElement($child);
 	}
