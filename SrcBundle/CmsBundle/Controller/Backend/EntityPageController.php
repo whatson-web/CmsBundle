@@ -30,7 +30,7 @@ class EntityPageController extends BaseController
         $entityPathConfig = $this->getEntityPathConfig();
 
         $entityPathConfigPage = array(
-            'bundlePrefix' => 'WH',
+            'bundlePrefix' => '',
             'bundle'       => 'CmsBundle',
             'entity'       => 'Page',
             'type'         => 'Backend',
