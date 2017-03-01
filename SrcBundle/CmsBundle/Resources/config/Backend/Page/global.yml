@@ -44,7 +44,7 @@ formFields:
         label: 'Parent page'
         field: 'parent'
         type: 'entity'
-        class: 'WHCmsBundle:Page'
+        class: 'CmsBundle:Page'
         choice_label: 'indentedName'
     menus:
         label: 'Menu(s)'
