@@ -103,7 +103,11 @@ class PageController extends BaseController
 
         $updateController->data = $data;
 
-        $updateController->config = $updateController->getConfig($entityPathConfig, 'update');
+        if (!empty($pageTemplate['updateConfig'])) {
+            $updateController->config = $updateController->getConfig($entityPathConfig, $pageTemplate['updateConfig']);
+        } else {
+            $updateController->config = $updateController->getConfig($entityPathConfig, 'update');
+        }
         $updateController->globalConfig = $updateController->getGlobalConfig($entityPathConfig);
 
         $updateController->renderVars['globalConfig'] = $updateController->globalConfig;
