@@ -51,7 +51,7 @@ class PageController extends BaseController
 		}
 		$pageTemplate = $pageTemplates[$pageTemplate];
 
-		$view = 'WHCmsBundle:Frontend/Page:view.html.twig';
+		$view = 'CmsBundle:Frontend/Page:view.html.twig';
 
 		if (!empty($pageTemplate['frontController'])) {
 			return $this->forward(
