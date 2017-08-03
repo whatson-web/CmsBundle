@@ -67,6 +67,7 @@ abstract class Page
 
     /**
      * @ORM\OneToOne(targetEntity="WH\SeoBundle\Entity\Url", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(referencedColumnName="id", onDelete="SET NULL")
      */
     protected $url;
 
