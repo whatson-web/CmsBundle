@@ -91,6 +91,11 @@ abstract class Page
     protected $menus;
 
     /**
+     * @Gedmo\Locale
+     */
+    private $locale;
+
+    /**
      * Get id
      *
      * @return integer
@@ -288,5 +293,13 @@ abstract class Page
     public function getMenus()
     {
         return json_decode($this->menus, true);
+    }
+
+    /**
+     * @param $locale
+     */
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
