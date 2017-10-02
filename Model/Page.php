@@ -21,6 +21,10 @@ use WH\LibBundle\Entity\Tree;
  */
 abstract class Page
 {
+    public function __toString()
+    {
+        return 'page';
+    }
 
     use Content, LogDate, Tree;
     use Status {
@@ -195,7 +199,7 @@ abstract class Page
     public function getIndentedName()
     {
 
-        return str_repeat(" > ", $this->lvl) . $this->name;
+        return str_repeat(" > ", $this->lvl).$this->name;
     }
 
     /**

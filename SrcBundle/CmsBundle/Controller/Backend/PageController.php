@@ -177,4 +177,19 @@ class PageController extends BaseController
         return $orderController->order($this->getEntityPathConfig(), $request);
     }
 
+    /**
+     * @Route("/recover/", name="bk_cms_page_recover")
+     *
+     * @return null
+     */
+    public function recoverAction()
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $em->getRepository('CmsBundle:Page')->recover();
+        $em->flush();
+
+        return null;
+    }
+
 }
